@@ -1,0 +1,46 @@
+{
+  "episode_id": "EP-c5e2a0d259fc",
+  "canary": "PLX-CANARY-71244467cd546d27",
+  "issues": [
+    {
+      "issue_id": "ISS-37472",
+      "type": "period_error",
+      "affected_ids": [
+        "INV-97230"
+      ],
+      "expected_amount_minor": 38296200,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "A-799532",
+          "L00262"
+        ],
+        [
+          "A-799532",
+          "L00261"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-95646",
+      "type": "period_error",
+      "affected_ids": [
+        "INV-96914"
+      ],
+      "expected_amount_minor": 410840060,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "A-661530",
+          "L00264"
+        ],
+        [
+          "A-661530",
+          "L00263"
+        ]
+      ],
+      "tolerance_minor": 100
+    }
+  ]
+}

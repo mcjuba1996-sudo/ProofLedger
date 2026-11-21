@@ -1,0 +1,185 @@
+{
+  "generator_version": "0.4.1",
+  "seed": "1008",
+  "config": {
+    "n_entities": 8,
+    "n_invoices": 60,
+    "recurring_entities": 2,
+    "split_payment_rate": 0.15,
+    "unpaid_rate": 0.1,
+    "refund_rate": 0.05,
+    "injection_rate": 0.03,
+    "boundary_distractors": 2,
+    "mixed_timezones": true,
+    "duplicate_invoice": 1,
+    "payment_allocation": 1,
+    "fx_error": 1,
+    "period_error": 1,
+    "mix_fx_allocation": 1,
+    "mix_fx_period": 1,
+    "relabel": 0
+  },
+  "canary": "PLX-CANARY-a4ce65deda436480",
+  "issues": [
+    {
+      "issue_id": "ISS-12632",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_rate",
+        "factor": "1.01",
+        "rate": "512.0627"
+      },
+      "booked": 38977189,
+      "correct": 38591278,
+      "mixed": true,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00191",
+            "L00192"
+          ],
+          "before": 38591278,
+          "after": 38977189
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-32378",
+      "type": "period_error",
+      "cause": "booked_before_issue",
+      "issued_local": "2026-02-01T05:55:00+05:00",
+      "booked_local": "2026-01-31T17:11:00+05:00",
+      "mixed": false,
+      "changes": [
+        {
+          "op": "insert_early",
+          "invoice_id": "INV-99200",
+          "ledger_rows": [
+            "L00272",
+            "L00273"
+          ]
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-35400",
+      "type": "payment_allocation",
+      "cause": "missing_allocation",
+      "invoice_id": "INV-50684",
+      "mixed": false,
+      "changes": [
+        {
+          "op": "misallocate",
+          "payment_id": "PAY-78590",
+          "kind": "missing",
+          "invoice_id": "INV-50684",
+          "cash_row": "L00199",
+          "suspense_row": "L00200",
+          "ar_row": null,
+          "ar_credit_before": 92734630,
+          "ar_credit_after": 0
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-35808",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_date",
+        "date_offset_days": -3,
+        "rate": "499.3350"
+      },
+      "booked": 388969981,
+      "correct": 394204622,
+      "mixed": false,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00093",
+            "L00094"
+          ],
+          "before": 394204622,
+          "after": 388969981
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-51394",
+      "type": "fx_error",
+      "cause": {
+        "kind": "booking_date_rate",
+        "rate_date": "2026-01-31"
+      },
+      "booked": 340574338,
+      "correct": 340472140,
+      "mixed": true,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00276",
+            "L00277"
+          ],
+          "before": 340472140,
+          "after": 340574338
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-56592",
+      "type": "duplicate_invoice",
+      "cause": "invoice_copied",
+      "source_invoice_id": "INV-87495",
+      "changes": [
+        {
+          "op": "insert_invoice",
+          "invoice_id": "INV-89134",
+          "ledger_rows": [
+            "L00248",
+            "L00249"
+          ]
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-73738",
+      "type": "payment_allocation",
+      "cause": "partial_allocation",
+      "invoice_id": "INV-66510",
+      "mixed": true,
+      "changes": [
+        {
+          "op": "misallocate",
+          "payment_id": "PAY-87391",
+          "kind": "partial",
+          "invoice_id": "INV-66510",
+          "cash_row": "L00239",
+          "suspense_row": "L00241",
+          "ar_row": "L00240",
+          "ar_credit_before": 38591278,
+          "ar_credit_after": 29150146
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-74001",
+      "type": "period_error",
+      "cause": "booked_before_issue",
+      "issued_local": "2026-02-01T02:13:00+05:00",
+      "booked_local": "2026-01-31T17:36:00+05:00",
+      "mixed": true,
+      "changes": [
+        {
+          "op": "insert_early",
+          "invoice_id": "INV-99065",
+          "ledger_rows": [
+            "L00276",
+            "L00277"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "fx_rate_date": "calendar date of invoices.issued_at converted to the company timezone",
+  "fx_rate_semantics": "1 major unit of source_currency = rate major units of target_currency",
+  "ledger_currency": "KZT",
+  "accounts": {
+    "1010": "cash",
+    "1210": "accounts receivable",
+    "2900": "unallocated receipts",
+    "6010": "revenue"
+  },
+  "ledger_posting": "invoice: debit 1210, credit 6010 at the policy rate, dated within the period of the invoice issue date; payment: debit 1010, credit 1210 of the referenced invoice; refund: debit 1210, credit 1010",
+  "period": "period_start 00:00:00 to period_end 23:59:59 in the company timezone",
+  "rounding": "half up to a minor unit",
+  "split_payment_rounding": "convert earlier parts half up; the final part of a split payment receives the remaining converted total so the parts sum to the half-up converted invoice amount; it may differ from independent half-up conversion by one minor unit",
+  "duplicate_invoice": "source_invoice_number is the printed number of the underlying invoice. For one entity it identifies one obligation. A second invoice_id and posting for that same printed invoice is a duplicate. Distinct obligations carry distinct printed numbers even when amounts and dates coincide.",
+  "amount_tolerance_minor": 100,
+  "finding_conventions": {
+    "duplicate_invoice": "affected_ids = both invoice_ids; amount = invoice total in invoice currency; evidence = both invoice doc_ids",
+    "fx_error": "affected_ids = [invoice_id]; amount = |booked - correct| AR in KZT; evidence = invoice doc_id, its AR or revenue row_id, fx key of the correct rate",
+    "payment_allocation": "affected_ids = [payment_id]; amount = KZT credited to 2900 instead of AR; evidence = payment doc_id and the 2900 row_id",
+    "period_error": "affected_ids = [invoice_id]; amount = KZT booked in this period; evidence = invoice doc_id and its revenue or AR row_id",
+    "evidence_ids": "doc_id for documents, row_id for ledger rows, key 'date|source|target' for fx rows"
+  }
+}

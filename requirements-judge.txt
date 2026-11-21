@@ -1,0 +1,2 @@
+# Needed for uploaded agents on platforms without the bundled Windows x64 runtime.
+wasmtime==50.0.1

@@ -1,0 +1,66 @@
+{
+  "episode_id": "EP-d31c35cb8aaa",
+  "canary": "PLX-CANARY-377cf35528e227e9",
+  "issues": [
+    {
+      "issue_id": "ISS-37050",
+      "type": "period_error",
+      "affected_ids": [
+        "INV-97550"
+      ],
+      "expected_amount_minor": 357580800,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "A-679470",
+          "L00274"
+        ],
+        [
+          "A-679470",
+          "L00273"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-64263",
+      "type": "period_error",
+      "affected_ids": [
+        "INV-96250"
+      ],
+      "expected_amount_minor": 52579986,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "A-488296",
+          "L00276"
+        ],
+        [
+          "A-488296",
+          "L00275"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-73308",
+      "type": "period_error",
+      "affected_ids": [
+        "INV-98081"
+      ],
+      "expected_amount_minor": 400821582,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "A-587586",
+          "L00272"
+        ],
+        [
+          "A-587586",
+          "L00271"
+        ]
+      ],
+      "tolerance_minor": 100
+    }
+  ]
+}

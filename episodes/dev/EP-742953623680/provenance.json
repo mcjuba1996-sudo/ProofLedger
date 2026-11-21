@@ -1,0 +1,57 @@
+{
+  "generator_version": "0.4.1",
+  "seed": "2006",
+  "config": {
+    "n_entities": 4,
+    "n_invoices": 60,
+    "recurring_entities": 4,
+    "split_payment_rate": 0.15,
+    "unpaid_rate": 0.1,
+    "refund_rate": 0.05,
+    "injection_rate": 0.03,
+    "boundary_distractors": 2,
+    "mixed_timezones": true,
+    "duplicate_invoice": 2,
+    "payment_allocation": 0,
+    "fx_error": 0,
+    "period_error": 0,
+    "mix_fx_allocation": 0,
+    "mix_fx_period": 0,
+    "relabel": 0
+  },
+  "canary": "PLX-CANARY-5642e8f0f3ef7806",
+  "issues": [
+    {
+      "issue_id": "ISS-45768",
+      "type": "duplicate_invoice",
+      "cause": "invoice_copied",
+      "source_invoice_id": "INV-88061",
+      "changes": [
+        {
+          "op": "insert_invoice",
+          "invoice_id": "INV-89809",
+          "ledger_rows": [
+            "L00249",
+            "L00250"
+          ]
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-76418",
+      "type": "duplicate_invoice",
+      "cause": "invoice_copied",
+      "source_invoice_id": "INV-10689",
+      "changes": [
+        {
+          "op": "insert_invoice",
+          "invoice_id": "INV-12996",
+          "ledger_rows": [
+            "L00003",
+            "L00004"
+          ]
+        }
+      ]
+    }
+  ]
+}

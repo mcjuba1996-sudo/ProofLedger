@@ -1,0 +1,99 @@
+...........................................s............................ [ 35%]
+........................................................................ [ 70%]
+............................................................             [100%]
+203 passed, 1 skipped in 170.42s (0:02:50)
+config        policy               P     R    F1   return  steps     ms
+clean         oracle            0.00  0.00  1.00    1.000    1.0   23.5
+clean         reconciler        0.00  0.00  1.00    0.976   13.0   41.7
+clean         random_explorer   0.00  0.00  1.00    0.988    7.0   23.4
+clean         flag_all          0.00  0.00  0.00   -1.000    5.0   29.2
+clean         silence           0.00  0.00  1.00    1.000    1.0   30.0
+dup           oracle            1.00  1.00  1.00    1.000    1.0   22.9
+dup           reconciler        1.00  1.00  1.00    0.976   13.0   43.7
+dup           random_explorer   0.00  0.00  0.00   -1.000    7.0   23.7
+dup           flag_all          0.00  0.00  0.00   -1.000    5.0   35.4
+dup           silence           0.00  0.00  0.00   -1.000    1.0   23.6
+alloc         oracle            1.00  1.00  1.00    1.000    1.0   24.3
+alloc         reconciler        1.00  1.00  1.00    0.976   12.9   43.6
+alloc         random_explorer   0.00  0.00  0.00   -1.000    7.0   25.2
+alloc         flag_all          0.00  0.00  0.00   -1.000    5.0   30.8
+alloc         silence           0.00  0.00  0.00   -1.000    1.0   28.1
+fx            oracle            1.00  1.00  1.00    1.000    1.0   24.0
+fx            reconciler        1.00  1.00  1.00    0.976   12.9   48.6
+fx            random_explorer   0.00  0.00  0.00   -1.000    7.0   23.6
+fx            flag_all          0.00  0.00  0.00   -1.000    5.0   30.4
+fx            silence           0.00  0.00  0.00   -1.000    1.0   22.4
+period        oracle            1.00  1.00  1.00    1.000    1.0   23.3
+period        reconciler        1.00  1.00  1.00    0.976   12.9   42.4
+period        random_explorer   0.00  0.00  0.00   -1.000    7.0   25.5
+period        flag_all          0.00  0.00  0.00   -1.000    5.0   31.6
+period        silence           0.00  0.00  0.00   -1.000    1.0   24.3
+mix_fx_alloc  oracle            1.00  1.00  1.00    1.000    1.0   22.5
+mix_fx_alloc  reconciler        1.00  1.00  1.00    0.976   12.9   42.3
+mix_fx_alloc  random_explorer   0.00  0.00  0.00   -1.000    7.0   24.0
+mix_fx_alloc  flag_all          0.00  0.00  0.00   -1.000    5.0   31.0
+mix_fx_alloc  silence           0.00  0.00  0.00   -1.000    1.0   23.1
+mix_fx_period oracle            1.00  1.00  1.00    1.000    1.0   25.9
+mix_fx_period reconciler        1.00  1.00  1.00    0.976   12.9   43.5
+mix_fx_period random_explorer   0.00  0.00  0.00   -1.000    7.0   26.8
+mix_fx_period flag_all          0.00  0.00  0.00   -1.000    5.0   29.5
+mix_fx_period silence           0.00  0.00  0.00   -1.000    1.0   24.2
+all           oracle            1.00  1.00  1.00    1.000    1.0   38.0
+all           reconciler        1.00  1.00  1.00    0.976   12.9   47.4
+all           random_explorer   0.00  0.00  0.00   -1.000    7.0   26.6
+all           flag_all          0.00  0.00  0.00   -1.000    5.0   31.1
+all           silence           0.00  0.00  0.00   -1.000    1.0   24.0
+PASS oracle return = 1 on clean
+PASS reconciler F1 = 1 on clean
+PASS oracle return = 1 on dup
+PASS reconciler F1 = 1 on dup
+PASS oracle return = 1 on alloc
+PASS reconciler F1 = 1 on alloc
+PASS oracle return = 1 on fx
+PASS reconciler F1 = 1 on fx
+PASS oracle return = 1 on period
+PASS reconciler F1 = 1 on period
+PASS oracle return = 1 on mix_fx_alloc
+PASS reconciler F1 = 1 on mix_fx_alloc
+PASS oracle return = 1 on mix_fx_period
+PASS reconciler F1 = 1 on mix_fx_period
+PASS oracle return = 1 on all
+PASS reconciler F1 = 1 on all
+PASS reconciler beats silence on dup
+PASS flag_all does not beat silence on dup
+PASS reconciler beats silence on alloc
+PASS flag_all does not beat silence on alloc
+PASS reconciler beats silence on fx
+PASS flag_all does not beat silence on fx
+PASS reconciler beats silence on period
+PASS flag_all does not beat silence on period
+PASS reconciler beats silence on mix_fx_alloc
+PASS flag_all does not beat silence on mix_fx_alloc
+PASS reconciler beats silence on mix_fx_period
+PASS flag_all does not beat silence on mix_fx_period
+PASS reconciler beats silence on all
+PASS flag_all does not beat silence on all
+PASS silence beats flag_all on clean
+PASS same seed + actions replay exactly
+PASS relabel (new ids/order) keeps oracle and reconciler result
+PASS slowest episode 0.12s < 60s
+PASS reconciler passes curriculum L1-L5
+PASS naive reconciler passes L1-L2 and fails from L3 (traps work)
+PASS flag_all passes no level
+PASS attack flag_all is defeated (< honest, <= silence on clean)
+PASS attack guessed_ids is defeated (< honest, <= silence on clean)
+PASS attack repeat_findings is defeated (< honest, <= silence on clean)
+PASS attack type_spray is defeated (< honest, <= silence on clean)
+PASS attack evidence_stuffing is defeated (< honest, <= silence on clean)
+PASS attack persuasive_wrong is defeated (< honest, <= silence on clean)
+PASS attack text_only is defeated (= honest)
+PASS attack sloppy_duplicates is defeated (< honest, <= silence on clean)
+PASS attack injection_follower is defeated (< honest, <= silence on clean)
+PASS attack wrong_episode is defeated (< honest, <= silence on clean)
+PASS attack oversize is defeated (< honest, <= silence on clean)
+PASS 50 episodes: clean books balance before injection, every issue traced
+PASS episodes within 200-2000 rows, 20-200 documents, 0-12 errors
+PASS all records match the published JSON schemas
+PASS evaluator runs in a separate process; closed mode leaks no reward
+52/52 checks passed
+ALL CHECKS PASSED

@@ -1,0 +1,65 @@
+{
+  "generator_version": "0.4.1",
+  "seed": "1007",
+  "config": {
+    "n_entities": 8,
+    "n_invoices": 60,
+    "recurring_entities": 2,
+    "split_payment_rate": 0.15,
+    "unpaid_rate": 0.1,
+    "refund_rate": 0.05,
+    "injection_rate": 0.03,
+    "boundary_distractors": 2,
+    "mixed_timezones": true,
+    "duplicate_invoice": 0,
+    "payment_allocation": 0,
+    "fx_error": 0,
+    "period_error": 0,
+    "mix_fx_allocation": 0,
+    "mix_fx_period": 1,
+    "relabel": 0
+  },
+  "canary": "PLX-CANARY-b33b644ff4a32ba2",
+  "issues": [
+    {
+      "issue_id": "ISS-34991",
+      "type": "period_error",
+      "cause": "booked_before_issue",
+      "issued_local": "2026-06-01T01:14:00-05:00",
+      "booked_local": "2026-05-31T21:07:00-05:00",
+      "mixed": true,
+      "changes": [
+        {
+          "op": "insert_early",
+          "invoice_id": "INV-97806",
+          "ledger_rows": [
+            "L00261",
+            "L00262"
+          ]
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-87953",
+      "type": "fx_error",
+      "cause": {
+        "kind": "booking_date_rate",
+        "rate_date": "2026-05-31"
+      },
+      "booked": 142637408,
+      "correct": 141995550,
+      "mixed": true,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00261",
+            "L00262"
+          ],
+          "before": 141995550,
+          "after": 142637408
+        }
+      ]
+    }
+  ]
+}

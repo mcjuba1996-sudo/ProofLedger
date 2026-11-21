@@ -1,0 +1,185 @@
+{
+  "generator_version": "0.4.1",
+  "config_version": "2026-11-20.2",
+  "train": [
+    {
+      "episode_id": "EP-d4bd5b0cd39f",
+      "seed": 1001,
+      "config": {},
+      "issues": 0
+    },
+    {
+      "episode_id": "EP-765a3200eb72",
+      "seed": 1002,
+      "config": {
+        "duplicate_invoice": 2
+      },
+      "issues": 2
+    },
+    {
+      "episode_id": "EP-1a0cbce0ccbc",
+      "seed": 1003,
+      "config": {
+        "payment_allocation": 2
+      },
+      "issues": 2
+    },
+    {
+      "episode_id": "EP-7b7149aa953a",
+      "seed": 1004,
+      "config": {
+        "fx_error": 2
+      },
+      "issues": 2
+    },
+    {
+      "episode_id": "EP-c5e2a0d259fc",
+      "seed": 1005,
+      "config": {
+        "period_error": 2
+      },
+      "issues": 2
+    },
+    {
+      "episode_id": "EP-b4b7becb08d4",
+      "seed": 1006,
+      "config": {
+        "mix_fx_allocation": 1
+      },
+      "issues": 2
+    },
+    {
+      "episode_id": "EP-4ba15a5388c8",
+      "seed": 1007,
+      "config": {
+        "mix_fx_period": 1
+      },
+      "issues": 2
+    },
+    {
+      "episode_id": "EP-20a1e3426fe4",
+      "seed": 1008,
+      "config": {
+        "duplicate_invoice": 1,
+        "payment_allocation": 1,
+        "fx_error": 1,
+        "period_error": 1,
+        "mix_fx_allocation": 1,
+        "mix_fx_period": 1
+      },
+      "issues": 8
+    },
+    {
+      "episode_id": "EP-ca57c2e50954",
+      "seed": 1009,
+      "config": {
+        "duplicate_invoice": 1,
+        "fx_error": 1,
+        "refund_rate": 0.2
+      },
+      "issues": 2
+    },
+    {
+      "episode_id": "EP-277036e326ce",
+      "seed": 1010,
+      "config": {},
+      "issues": 0
+    }
+  ],
+  "dev": [
+    {
+      "episode_id": "EP-4b5c3f7c3f40",
+      "seed": 2001,
+      "config": {
+        "n_invoices": 75,
+        "duplicate_invoice": 3,
+        "fx_error": 3
+      },
+      "issues": 6
+    },
+    {
+      "episode_id": "EP-163733439ec3",
+      "seed": 2002,
+      "config": {},
+      "issues": 0
+    },
+    {
+      "episode_id": "EP-af4ea3f2a243",
+      "seed": 2003,
+      "config": {
+        "payment_allocation": 3,
+        "split_payment_rate": 0.4
+      },
+      "issues": 3
+    },
+    {
+      "episode_id": "EP-d31c35cb8aaa",
+      "seed": 2004,
+      "config": {
+        "period_error": 3,
+        "boundary_distractors": 6
+      },
+      "issues": 3
+    },
+    {
+      "episode_id": "EP-5168afca15ec",
+      "seed": 2005,
+      "config": {
+        "mix_fx_allocation": 2,
+        "mix_fx_period": 2
+      },
+      "issues": 8
+    },
+    {
+      "episode_id": "EP-742953623680",
+      "seed": 2006,
+      "config": {
+        "n_entities": 4,
+        "recurring_entities": 4,
+        "duplicate_invoice": 2
+      },
+      "issues": 2
+    },
+    {
+      "episode_id": "EP-f30b07093254",
+      "seed": 2007,
+      "config": {
+        "n_invoices": 70,
+        "n_entities": 16,
+        "duplicate_invoice": 1,
+        "payment_allocation": 1,
+        "fx_error": 1,
+        "period_error": 1,
+        "mix_fx_allocation": 1,
+        "mix_fx_period": 1
+      },
+      "issues": 8
+    },
+    {
+      "episode_id": "EP-12f45df62772",
+      "seed": 2008,
+      "config": {},
+      "issues": 0
+    },
+    {
+      "episode_id": "EP-b3f92f3bbd34",
+      "seed": 2009,
+      "config": {
+        "fx_error": 4,
+        "payment_allocation": 2,
+        "period_error": 2
+      },
+      "issues": 8
+    },
+    {
+      "episode_id": "EP-79ace378e03f",
+      "seed": 2010,
+      "config": {
+        "duplicate_invoice": 2,
+        "mix_fx_period": 1,
+        "unpaid_rate": 0.3
+      },
+      "issues": 4
+    }
+  ]
+}

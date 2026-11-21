@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "generator_version": "0.4.1",
+  "episode_id": "EP-20a1e3426fe4",
+  "base_currency": "KZT",
+  "period_start": "2026-01-01",
+  "period_end": "2026-01-31",
+  "timezone": "+05:00",
+  "counts": {
+    "ledger_rows": 279,
+    "invoices": 73,
+    "payments": 66,
+    "fx_rates": 82
+  },
+  "rounding": {
+    "mode": "half_up",
+    "minor_unit_exponent": {
+      "KZT": 2,
+      "USD": 2,
+      "EUR": 2
+    }
+  }
+}

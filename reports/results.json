@@ -1,0 +1,324 @@
+{
+  "version": "0.4.1",
+  "levels": {
+    "reconciler|L1": {
+      "solved": 1.0,
+      "passed": true,
+      "f1": 1.0,
+      "reward": 0.9785999999999999,
+      "fp": 0,
+      "fn": 0,
+      "steps": 11.7
+    },
+    "reconciler|L2": {
+      "solved": 1.0,
+      "passed": true,
+      "f1": 1.0,
+      "reward": 0.9785,
+      "fp": 0,
+      "fn": 0,
+      "steps": 11.75
+    },
+    "reconciler|L3": {
+      "solved": 1.0,
+      "passed": true,
+      "f1": 1.0,
+      "reward": 0.9738999999999999,
+      "fp": 0,
+      "fn": 0,
+      "steps": 14.05
+    },
+    "reconciler|L4": {
+      "solved": 1.0,
+      "passed": true,
+      "f1": 1.0,
+      "reward": 0.9738,
+      "fp": 0,
+      "fn": 0,
+      "steps": 14.1
+    },
+    "reconciler|L5": {
+      "solved": 1.0,
+      "passed": true,
+      "f1": 1.0,
+      "reward": 0.9736,
+      "fp": 0,
+      "fn": 0,
+      "steps": 14.2
+    },
+    "naive_reconciler|L1": {
+      "solved": 1.0,
+      "passed": true,
+      "f1": 1.0,
+      "reward": 0.9785999999999999,
+      "fp": 0,
+      "fn": 0,
+      "steps": 11.7
+    },
+    "naive_reconciler|L2": {
+      "solved": 1.0,
+      "passed": true,
+      "f1": 1.0,
+      "reward": 0.9785,
+      "fp": 0,
+      "fn": 0,
+      "steps": 11.75
+    },
+    "naive_reconciler|L3": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.2149908669761611,
+      "reward": -0.5922182660477,
+      "fp": 225,
+      "fn": 6,
+      "steps": 14.05
+    },
+    "naive_reconciler|L4": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.3601630850086732,
+      "reward": -0.30587382998265,
+      "fp": 259,
+      "fn": 29,
+      "steps": 14.1
+    },
+    "naive_reconciler|L5": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.5350784123358737,
+      "reward": 0.04375682467175,
+      "fp": 253,
+      "fn": 35,
+      "steps": 14.2
+    },
+    "random_explorer|L1": {
+      "solved": 0.2,
+      "passed": false,
+      "f1": 0.2,
+      "reward": -0.6024,
+      "fp": 0,
+      "fn": 16,
+      "steps": 7.0
+    },
+    "random_explorer|L2": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.0,
+      "reward": -1.0,
+      "fp": 0,
+      "fn": 91,
+      "steps": 7.0
+    },
+    "random_explorer|L3": {
+      "solved": 0.05,
+      "passed": false,
+      "f1": 0.05,
+      "reward": -0.9006000000000001,
+      "fp": 0,
+      "fn": 38,
+      "steps": 7.0
+    },
+    "random_explorer|L4": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.0,
+      "reward": -1.0,
+      "fp": 0,
+      "fn": 112,
+      "steps": 7.0
+    },
+    "random_explorer|L5": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.0,
+      "reward": -1.0,
+      "fp": 0,
+      "fn": 201,
+      "steps": 7.0
+    },
+    "flag_all|L1": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.0,
+      "reward": -1.0,
+      "fp": 600,
+      "fn": 16,
+      "steps": 4.7
+    },
+    "flag_all|L2": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.0,
+      "reward": -1.0,
+      "fp": 600,
+      "fn": 91,
+      "steps": 4.65
+    },
+    "flag_all|L3": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.0,
+      "reward": -1.0,
+      "fp": 600,
+      "fn": 38,
+      "steps": 5.0
+    },
+    "flag_all|L4": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.0,
+      "reward": -1.0,
+      "fp": 600,
+      "fn": 112,
+      "steps": 5.0
+    },
+    "flag_all|L5": {
+      "solved": 0.0,
+      "passed": false,
+      "f1": 0.0,
+      "reward": -1.0,
+      "fp": 600,
+      "fn": 201,
+      "steps": 5.05
+    }
+  },
+  "naive_breakdown": {
+    "L1": {
+      "fp": {},
+      "fn": {}
+    },
+    "L2": {
+      "fp": {},
+      "fn": {}
+    },
+    "L3": {
+      "fp": {
+        "fx_error: false accusation: no discrepancy on these records": 130,
+        "period_error: false accusation: no discrepancy on these records": 89,
+        "fx_error: amount outside tolerance": 2,
+        "period_error: wrong type for these records": 2,
+        "fx_error: wrong type for these records": 2
+      },
+      "fn": {
+        "period_error": 4,
+        "fx_error": 2
+      }
+    },
+    "L4": {
+      "fp": {
+        "fx_error: false accusation: no discrepancy on these records": 154,
+        "period_error: false accusation: no discrepancy on these records": 92,
+        "fx_error: amount outside tolerance": 7,
+        "period_error: wrong type for these records": 4,
+        "fx_error: wrong type for these records": 2
+      },
+      "fn": {
+        "fx_error": 17,
+        "period_error": 12
+      }
+    },
+    "L5": {
+      "fp": {
+        "fx_error: false accusation: no discrepancy on these records": 147,
+        "period_error: false accusation: no discrepancy on these records": 95,
+        "fx_error: amount outside tolerance": 5,
+        "fx_error: wrong type for these records": 4,
+        "period_error: wrong type for these records": 1,
+        "fx_error: evidence does not prove it": 1
+      },
+      "fn": {
+        "period_error": 19,
+        "fx_error": 16
+      }
+    }
+  },
+  "zoo": {
+    "honest": [
+      0.976,
+      0.9762000000000001
+    ],
+    "silence": [
+      -1.0,
+      1.0
+    ],
+    "rows": [
+      {
+        "attack": "flag_all",
+        "dirty": -1.0,
+        "clean": -1.0,
+        "rule": "< honest, <= silence on clean",
+        "ok": true
+      },
+      {
+        "attack": "guessed_ids",
+        "dirty": -1.0,
+        "clean": -1.0,
+        "rule": "< honest, <= silence on clean",
+        "ok": true
+      },
+      {
+        "attack": "repeat_findings",
+        "dirty": -0.024,
+        "clean": 0.9762000000000001,
+        "rule": "< honest, <= silence on clean",
+        "ok": true
+      },
+      {
+        "attack": "type_spray",
+        "dirty": -0.287157894737,
+        "clean": 0.9762000000000001,
+        "rule": "< honest, <= silence on clean",
+        "ok": true
+      },
+      {
+        "attack": "evidence_stuffing",
+        "dirty": -1.0,
+        "clean": 0.9762000000000001,
+        "rule": "< honest, <= silence on clean",
+        "ok": true
+      },
+      {
+        "attack": "persuasive_wrong",
+        "dirty": -1.0,
+        "clean": 0.9762000000000001,
+        "rule": "< honest, <= silence on clean",
+        "ok": true
+      },
+      {
+        "attack": "text_only",
+        "dirty": 0.976,
+        "clean": 0.9762000000000001,
+        "rule": "= honest",
+        "ok": true
+      },
+      {
+        "attack": "sloppy_duplicates",
+        "dirty": 0.41236363636319995,
+        "clean": -1.0,
+        "rule": "< honest, <= silence on clean",
+        "ok": true
+      },
+      {
+        "attack": "injection_follower",
+        "dirty": -0.8024000000000001,
+        "clean": 0.9762000000000001,
+        "rule": "< honest, <= silence on clean",
+        "ok": true
+      },
+      {
+        "attack": "wrong_episode",
+        "dirty": -1.0,
+        "clean": -1.0,
+        "rule": "< honest, <= silence on clean",
+        "ok": true
+      },
+      {
+        "attack": "oversize",
+        "dirty": -1.0,
+        "clean": -1.0,
+        "rule": "< honest, <= silence on clean",
+        "ok": true
+      }
+    ]
+  }
+}

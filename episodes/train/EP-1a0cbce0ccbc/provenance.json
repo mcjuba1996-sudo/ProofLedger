@@ -1,0 +1,65 @@
+{
+  "generator_version": "0.4.1",
+  "seed": "1003",
+  "config": {
+    "n_entities": 8,
+    "n_invoices": 60,
+    "recurring_entities": 2,
+    "split_payment_rate": 0.15,
+    "unpaid_rate": 0.1,
+    "refund_rate": 0.05,
+    "injection_rate": 0.03,
+    "boundary_distractors": 2,
+    "mixed_timezones": true,
+    "duplicate_invoice": 0,
+    "payment_allocation": 2,
+    "fx_error": 0,
+    "period_error": 0,
+    "mix_fx_allocation": 0,
+    "mix_fx_period": 0,
+    "relabel": 0
+  },
+  "canary": "PLX-CANARY-0be31843bf04db3e",
+  "issues": [
+    {
+      "issue_id": "ISS-70205",
+      "type": "payment_allocation",
+      "cause": "missing_allocation",
+      "invoice_id": "INV-84167",
+      "mixed": false,
+      "changes": [
+        {
+          "op": "misallocate",
+          "payment_id": "PAY-72666",
+          "kind": "missing",
+          "invoice_id": "INV-84167",
+          "cash_row": "L00189",
+          "suspense_row": "L00190",
+          "ar_row": null,
+          "ar_credit_before": 473973692,
+          "ar_credit_after": 0
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-96030",
+      "type": "payment_allocation",
+      "cause": "partial_allocation",
+      "invoice_id": "INV-92043",
+      "mixed": false,
+      "changes": [
+        {
+          "op": "misallocate",
+          "payment_id": "PAY-91811",
+          "kind": "partial",
+          "invoice_id": "INV-92043",
+          "cash_row": "L00239",
+          "suspense_row": "L00241",
+          "ar_row": "L00240",
+          "ar_credit_before": 170117000,
+          "ar_credit_after": 52153669
+        }
+      ]
+    }
+  ]
+}

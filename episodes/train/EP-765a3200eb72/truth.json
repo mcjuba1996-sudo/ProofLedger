@@ -1,0 +1,40 @@
+{
+  "episode_id": "EP-765a3200eb72",
+  "canary": "PLX-CANARY-a705ed30c7ec552c",
+  "issues": [
+    {
+      "issue_id": "ISS-43001",
+      "type": "duplicate_invoice",
+      "affected_ids": [
+        "INV-26699",
+        "INV-26870"
+      ],
+      "expected_amount_minor": 263642,
+      "currency": "EUR",
+      "evidence_sets": [
+        [
+          "A-209281",
+          "A-780532"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-56914",
+      "type": "duplicate_invoice",
+      "affected_ids": [
+        "INV-43273",
+        "INV-43878"
+      ],
+      "expected_amount_minor": 770478,
+      "currency": "EUR",
+      "evidence_sets": [
+        [
+          "A-123288",
+          "A-156683"
+        ]
+      ],
+      "tolerance_minor": 100
+    }
+  ]
+}

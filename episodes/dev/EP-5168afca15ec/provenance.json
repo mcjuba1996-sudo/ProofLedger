@@ -1,0 +1,191 @@
+{
+  "generator_version": "0.4.1",
+  "seed": "2005",
+  "config": {
+    "n_entities": 8,
+    "n_invoices": 60,
+    "recurring_entities": 2,
+    "split_payment_rate": 0.15,
+    "unpaid_rate": 0.1,
+    "refund_rate": 0.05,
+    "injection_rate": 0.03,
+    "boundary_distractors": 2,
+    "mixed_timezones": true,
+    "duplicate_invoice": 0,
+    "payment_allocation": 0,
+    "fx_error": 0,
+    "period_error": 0,
+    "mix_fx_allocation": 2,
+    "mix_fx_period": 2,
+    "relabel": 0
+  },
+  "canary": "PLX-CANARY-ab0ec44ec97b85df",
+  "issues": [
+    {
+      "issue_id": "ISS-25145",
+      "type": "period_error",
+      "cause": "booked_before_issue",
+      "issued_local": "2026-06-01T01:47:00+06:00",
+      "booked_local": "2026-05-31T20:23:00+06:00",
+      "mixed": true,
+      "changes": [
+        {
+          "op": "insert_early",
+          "invoice_id": "INV-94911",
+          "ledger_rows": [
+            "L00265",
+            "L00266"
+          ]
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-29148",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_rate",
+        "factor": "1.02",
+        "rate": "534.0249"
+      },
+      "booked": 518745380,
+      "correct": 508573879,
+      "mixed": true,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00057",
+            "L00058"
+          ],
+          "before": 508573879,
+          "after": 518745380
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-29232",
+      "type": "payment_allocation",
+      "cause": "partial_allocation",
+      "invoice_id": "INV-24899",
+      "mixed": true,
+      "changes": [
+        {
+          "op": "misallocate",
+          "payment_id": "PAY-42503",
+          "kind": "partial",
+          "invoice_id": "INV-24899",
+          "cash_row": "L00095",
+          "suspense_row": "L00097",
+          "ar_row": "L00096",
+          "ar_credit_before": 135605231,
+          "ar_credit_after": 32192439
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-41225",
+      "type": "fx_error",
+      "cause": {
+        "kind": "booking_date_rate",
+        "rate_date": "2026-05-31"
+      },
+      "booked": 320918769,
+      "correct": 322074049,
+      "mixed": true,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00267",
+            "L00268"
+          ],
+          "before": 322074049,
+          "after": 320918769
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-52089",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_rate",
+        "factor": "0.95",
+        "rate": "447.8968"
+      },
+      "booked": 128824973,
+      "correct": 135605231,
+      "mixed": true,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00037",
+            "L00038"
+          ],
+          "before": 135605231,
+          "after": 128824973
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-57467",
+      "type": "period_error",
+      "cause": "booked_before_issue",
+      "issued_local": "2026-06-01T05:26:00+06:00",
+      "booked_local": "2026-05-31T21:10:00+06:00",
+      "mixed": true,
+      "changes": [
+        {
+          "op": "insert_early",
+          "invoice_id": "INV-95172",
+          "ledger_rows": [
+            "L00267",
+            "L00268"
+          ]
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-74294",
+      "type": "payment_allocation",
+      "cause": "partial_allocation",
+      "invoice_id": "INV-31166",
+      "mixed": true,
+      "changes": [
+        {
+          "op": "misallocate",
+          "payment_id": "PAY-46001",
+          "kind": "partial",
+          "invoice_id": "INV-31166",
+          "cash_row": "L00102",
+          "suspense_row": "L00104",
+          "ar_row": "L00103",
+          "ar_credit_before": 508573879,
+          "ar_credit_after": 161966712
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-78496",
+      "type": "fx_error",
+      "cause": {
+        "kind": "booking_date_rate",
+        "rate_date": "2026-05-31"
+      },
+      "booked": 287817869,
+      "correct": 288853989,
+      "mixed": true,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00265",
+            "L00266"
+          ],
+          "before": 288853989,
+          "after": 287817869
+        }
+      ]
+    }
+  ]
+}

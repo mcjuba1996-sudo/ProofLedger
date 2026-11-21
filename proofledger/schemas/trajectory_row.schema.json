@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "trajectories.jsonl row",
+  "type": "object",
+  "required": [
+    "episode_id",
+    "step",
+    "action",
+    "observation",
+    "reward",
+    "terminated",
+    "truncated"
+  ],
+  "properties": {
+    "policy": {
+      "type": "string"
+    },
+    "episode_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "step": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "action": {
+      "type": [
+        "object",
+        "null",
+        "string"
+      ]
+    },
+    "observation": {
+      "type": "object"
+    },
+    "reward": {
+      "type": "number"
+    },
+    "terminated": {
+      "type": "boolean"
+    },
+    "truncated": {
+      "type": "boolean"
+    }
+  }
+}

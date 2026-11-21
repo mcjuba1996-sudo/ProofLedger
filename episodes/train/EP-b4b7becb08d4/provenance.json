@@ -1,0 +1,68 @@
+{
+  "generator_version": "0.4.1",
+  "seed": "1006",
+  "config": {
+    "n_entities": 8,
+    "n_invoices": 60,
+    "recurring_entities": 2,
+    "split_payment_rate": 0.15,
+    "unpaid_rate": 0.1,
+    "refund_rate": 0.05,
+    "injection_rate": 0.03,
+    "boundary_distractors": 2,
+    "mixed_timezones": true,
+    "duplicate_invoice": 0,
+    "payment_allocation": 0,
+    "fx_error": 0,
+    "period_error": 0,
+    "mix_fx_allocation": 1,
+    "mix_fx_period": 0,
+    "relabel": 0
+  },
+  "canary": "PLX-CANARY-eb3849a01d0996fa",
+  "issues": [
+    {
+      "issue_id": "ISS-37020",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_rate",
+        "factor": "0.97",
+        "rate": "534.5317"
+      },
+      "booked": 122514666,
+      "correct": 126303777,
+      "mixed": true,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00049",
+            "L00050"
+          ],
+          "before": 126303777,
+          "after": 122514666
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-91082",
+      "type": "payment_allocation",
+      "cause": "partial_allocation",
+      "invoice_id": "INV-35008",
+      "mixed": true,
+      "changes": [
+        {
+          "op": "misallocate",
+          "payment_id": "PAY-43615",
+          "kind": "partial",
+          "invoice_id": "INV-35008",
+          "cash_row": "L00137",
+          "suspense_row": "L00139",
+          "ar_row": "L00138",
+          "ar_credit_before": 126303777,
+          "ar_credit_after": 63917712
+        }
+      ]
+    }
+  ]
+}

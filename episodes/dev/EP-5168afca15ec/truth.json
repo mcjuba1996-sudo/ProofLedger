@@ -1,0 +1,166 @@
+{
+  "episode_id": "EP-5168afca15ec",
+  "canary": "PLX-CANARY-ab0ec44ec97b85df",
+  "issues": [
+    {
+      "issue_id": "ISS-25145",
+      "type": "period_error",
+      "affected_ids": [
+        "INV-94911"
+      ],
+      "expected_amount_minor": 287817869,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "A-865734",
+          "L00266"
+        ],
+        [
+          "A-865734",
+          "L00265"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-29148",
+      "type": "fx_error",
+      "affected_ids": [
+        "INV-31166"
+      ],
+      "expected_amount_minor": 10171501,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2026-05-09|EUR|KZT",
+          "A-892834",
+          "L00057"
+        ],
+        [
+          "2026-05-09|EUR|KZT",
+          "A-892834",
+          "L00058"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-29232",
+      "type": "payment_allocation",
+      "affected_ids": [
+        "PAY-42503"
+      ],
+      "expected_amount_minor": 103412792,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "L00097",
+          "P-926228"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-41225",
+      "type": "fx_error",
+      "affected_ids": [
+        "INV-95172"
+      ],
+      "expected_amount_minor": 1155280,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2026-06-01|EUR|KZT",
+          "A-776593",
+          "L00267"
+        ],
+        [
+          "2026-06-01|EUR|KZT",
+          "A-776593",
+          "L00268"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-52089",
+      "type": "fx_error",
+      "affected_ids": [
+        "INV-24899"
+      ],
+      "expected_amount_minor": 6780258,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2026-05-06|USD|KZT",
+          "A-769293",
+          "L00037"
+        ],
+        [
+          "2026-05-06|USD|KZT",
+          "A-769293",
+          "L00038"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-57467",
+      "type": "period_error",
+      "affected_ids": [
+        "INV-95172"
+      ],
+      "expected_amount_minor": 320918769,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "A-776593",
+          "L00268"
+        ],
+        [
+          "A-776593",
+          "L00267"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-74294",
+      "type": "payment_allocation",
+      "affected_ids": [
+        "PAY-46001"
+      ],
+      "expected_amount_minor": 346607167,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "L00104",
+          "P-913060"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-78496",
+      "type": "fx_error",
+      "affected_ids": [
+        "INV-94911"
+      ],
+      "expected_amount_minor": 1036120,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2026-06-01|EUR|KZT",
+          "A-865734",
+          "L00265"
+        ],
+        [
+          "2026-06-01|EUR|KZT",
+          "A-865734",
+          "L00266"
+        ]
+      ],
+      "tolerance_minor": 100
+    }
+  ]
+}

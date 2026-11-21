@@ -1,0 +1,71 @@
+{
+  "generator_version": "0.4.1",
+  "seed": "1004",
+  "config": {
+    "n_entities": 8,
+    "n_invoices": 60,
+    "recurring_entities": 2,
+    "split_payment_rate": 0.15,
+    "unpaid_rate": 0.1,
+    "refund_rate": 0.05,
+    "injection_rate": 0.03,
+    "boundary_distractors": 2,
+    "mixed_timezones": true,
+    "duplicate_invoice": 0,
+    "payment_allocation": 0,
+    "fx_error": 2,
+    "period_error": 0,
+    "mix_fx_allocation": 0,
+    "mix_fx_period": 0,
+    "relabel": 0
+  },
+  "canary": "PLX-CANARY-d14613b6e2251956",
+  "issues": [
+    {
+      "issue_id": "ISS-13566",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_date",
+        "date_offset_days": 1,
+        "rate": "454.9652"
+      },
+      "booked": 231484929,
+      "correct": 232507967,
+      "mixed": false,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00085",
+            "L00086"
+          ],
+          "before": 232507967,
+          "after": 231484929
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-68135",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_date",
+        "date_offset_days": 1,
+        "rate": "455.7705"
+      },
+      "booked": 176771956,
+      "correct": 177321660,
+      "mixed": false,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00133",
+            "L00134"
+          ],
+          "before": 177321660,
+          "after": 176771956
+        }
+      ]
+    }
+  ]
+}

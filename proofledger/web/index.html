@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080d1c">
+  <title>ProofLedger Live · Лаборатория аудита</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="ProofLedger Live, главная">
+    <svg class="brand-icon" viewBox="0 0 38 42" aria-hidden="true"><path d="M19 2 35 10v17L19 39 3 27V10Z"/><path d="m10 20 6 6 12-13"/></svg>
+    <span>ProofLedger<span class="brand-live">LIVE</span></span>
+  </a>
+  <div class="header-context">Среда финансового аудита <span class="header-line"></span><span>Локальный запуск</span></div>
+  <span class="version" id="version">v0.6.2</span>
+</header>
+
+<main>
+  <section class="page-intro" aria-labelledby="page-title">
+    <div><div class="eyebrow">ДАННЫЕ. ДОКАЗАТЕЛЬСТВА. РЕЗУЛЬТАТ.</div><h1 id="page-title">Лаборатория аудита</h1><p>Запустите агента и проследите путь от первого запроса до проверенного вывода.</p></div>
+    <div class="agent-badge"><span class="agent-mark" id="agent-mark" aria-hidden="true">R</span><div><span class="micro-label">ВЫБРАННЫЙ АГЕНТ</span><strong id="agent-name">Reconciler</strong></div><span class="local-tag" id="agent-origin">Встроенный</span></div>
+  </section>
+
+  <section class="agent-controls" aria-label="Подключение агента-аудитора">
+    <label class="field agent-field"><span>Агент-аудитор</span><select id="agent-select" name="agent_id"><option value="reconciler">Reconciler · встроенный</option></select></label>
+    <div class="agent-import"><input id="agent-file" type="file" accept=".py,text/x-python" hidden><button class="button secondary upload-button" id="upload-agent" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 2h8l4 4v12H4Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 8v6m-3-3h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Добавить .py</button></div>
+    <div class="agent-guidance"><p>Один файл .py в UTF-8 до 64 КиБ. Объявите класс Agent с методами reset и act. Доступна стандартная библиотека Python для WASI.</p><details id="agent-examples"><summary>Скачать пример агента</summary><div id="example-links" class="example-links"><span>Загрузка списка примеров…</span></div></details></div>
+    <p id="runtime-warning" class="upload-message is-warning" role="status" hidden>Среда выполнения загруженных .py недоступна. Установите её по инструкции README. Встроенный Reconciler можно запускать.</p>
+    <p id="upload-message" class="upload-message" role="status" hidden></p>
+  </section>
+  <form class="run-controls" id="run-form">
+    <label class="field scenario-field"><span>Сценарий</span><select id="level" name="level"><option value="L4">L4 · Сплетённые ошибки</option></select></label>
+    <label class="field seed-field"><span>Seed эпизода</span><input id="seed" name="seed" type="number" min="0" max="2147483647" step="1" value="7" required inputmode="numeric"></label>
+    <label class="field mode-field"><span>Режим</span><select id="mode" name="mode"><option value="demo">Демонстрационный</option><option value="closed">Закрытая проверка</option></select></label>
+    <div class="run-actions"><button class="button primary" id="run-button" type="submit"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 10 7-10 7Z"/></svg><span>Запустить аудит</span></button><button class="button stop-button" id="stop-button" type="button" hidden><span class="stop-square" aria-hidden="true"></span>Остановить</button></div>
+  </form>
+  <div class="configuration-note"><span id="level-description">Валютный счёт с частичным платежом и ошибки на границе отчётного периода.</span><span id="mode-description">Один эпизод · до 100 шагов · без сети</span></div>
+  <div class="error-banner" id="error-banner" role="alert" hidden></div>
+
+  <div class="workspace-grid">
+    <section class="scene-panel" aria-labelledby="scene-heading">
+      <div class="panel-heading scene-toolbar">
+        <h2 id="scene-heading">Сцена выполнения</h2>
+        <fieldset class="scene-views">
+          <legend class="sr-only">Вид сцены</legend>
+          <label><input class="sr-only" type="radio" name="scene-view" value="isometric" checked><span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m2 5 6-3.5L14 5v6l-6 3.5L2 11ZM2 5l6 3.5L14 5M8 8.5v6"/></svg>Объём</span></label>
+          <label><input class="sr-only" type="radio" name="scene-view" value="schematic"><span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 8h6"/><rect x="1" y="5.5" width="4.5" height="5" rx="1"/><rect x="10.5" y="5.5" width="4.5" height="5" rx="1"/></svg>Схема</span></label>
+        </fieldset>
+        <span class="status-pill" id="run-status" data-status="idle">Готов к запуску</span>
+      </div>
+      <div class="scene" id="scene" data-active="idle" data-view="isometric">
+        <div class="scene-caption"><span class="scene-caption-kicker" id="scene-kicker">Ожидание запуска</span><strong id="scene-title">Агент готов к аудиту</strong><p id="scene-description">Во время запуска здесь появятся запросы агента и ответы среды.</p></div>
+        <div class="audit-diagram">
+          <div class="diagram-drawing"><svg class="audit-canvas" viewBox="0 0 1000 260" role="img" aria-label="Маршруты между агентом, данными компании, калькулятором и оценщиком">
+          <defs>
+            <linearGradient id="surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#152e5f"/><stop offset="1" stop-color="#191d40"/></linearGradient>
+            <linearGradient id="cyan-surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#136d88"/><stop offset="1" stop-color="#233465"/></linearGradient>
+            <linearGradient id="cyan-side" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#1d648b"/><stop offset="1" stop-color="#122540"/></linearGradient>
+            <linearGradient id="violet-surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#573693"/><stop offset="1" stop-color="#1d335e"/></linearGradient>
+            <linearGradient id="flow-gradient"><stop stop-color="#25d6ee"/><stop offset=".55" stop-color="#5186ff"/><stop offset="1" stop-color="#b47aff"/></linearGradient>
+            <radialGradient id="floor-glow"><stop stop-color="#244d93" stop-opacity=".55"/><stop offset="1" stop-color="#152445" stop-opacity="0"/></radialGradient>
+            <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4"/></filter>
+            <filter id="subtle-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2"/></filter>
+            <pattern id="grid" width="72" height="40" patternUnits="userSpaceOnUse"><path d="M0 20 36 0 72 20 36 40Z" fill="none" stroke="#456191" stroke-opacity=".12" stroke-width="1"/></pattern>
+            <symbol id="paper" viewBox="0 0 44 52"><path d="M5 2h25l9 10v38H5Z" fill="#c4f6ff" stroke="#6fddf2" stroke-width="1.5"/><path d="M29 3v11h9M12 22h20M12 29h20M12 36h12" fill="none" stroke="#267399" stroke-width="2"/></symbol>
+          </defs>
+          <g class="isometric-art">
+            <ellipse cx="505" cy="165" rx="448" ry="128" fill="url(#floor-glow)"/>
+            <path d="M45 152 356 0H665L961 147 743 260H246Z" fill="url(#grid)" opacity=".72"/>
+            <g class="iso-tracks" fill="none" stroke-linecap="round">
+              <path class="rail rail-read" d="M261 153 C305 179 327 180 389 153 L442 139"/>
+              <path class="path-read" d="M261 153 C305 179 327 180 389 153 L442 139"/>
+              <path class="rail rail-reply" d="M445 150 L389 165 C336 191 305 191 261 165"/>
+              <path class="path-reply" d="M445 150 L389 165 C336 191 305 191 261 165"/>
+              <path class="rail rail-submit" d="M227 177 L322 220 Q373 244 435 244 H598 Q667 244 709 215 L763 175"/>
+              <path class="path-submit" d="M227 177 L322 220 Q373 244 435 244 H598 Q667 244 709 215 L763 175"/>
+              <path class="rail rail-calculator" d="M231 175 L313 208 Q350 225 397 225 H512 Q544 225 569 207 L611 180"/>
+              <path class="path-calculator" d="M231 175 L313 208 Q350 225 397 225 H512 Q544 225 569 207 L611 180"/>
+            </g>
+          <g class="scene-node agent-node" data-node="agent" transform="translate(200 148) scale(.73) translate(-216 -267)">
+            <ellipse class="node-halo" cx="216" cy="275" rx="116" ry="47" fill="#27cce5" filter="url(#glow)"/>
+            <path d="m109 265 107-60 110 61-110 64Z" fill="#142744" stroke="#26557b"/>
+            <path d="m109 265 107 61v15l-107-60Z" fill="#0c1c33" stroke="#234464"/>
+            <path d="m216 326 110-60v15l-110 60Z" fill="#10213e" stroke="#234464"/>
+            <path class="node-rim" d="m120 263 96-53 99 55-99 56Z" fill="none" stroke="#36c9e8"/>
+            <g class="network-lines" fill="none" stroke="#4095bf" stroke-width="1.3" opacity=".65">
+              <path d="m140 229 48-61 48 68 50-56M140 229l96 7-7-115-41 47 98 12M188 168l41-47 57 59-50 56M140 229l89-108M188 168l48 68"/>
+              <path d="m170 270 18-102 79 103M140 229l127 42M170 270l66-34 50-56"/>
+            </g>
+            <g class="network-dots" fill="#9ef4ff"><circle cx="140" cy="229" r="7"/><circle cx="188" cy="168" r="8"/><circle cx="229" cy="121" r="8"/><circle cx="286" cy="180" r="7"/><circle cx="236" cy="236" r="9"/><circle cx="170" cy="270" r="6"/><circle cx="267" cy="271" r="6"/></g>
+            <g class="network-sparks" fill="#76e9ff" filter="url(#glow)"><circle cx="188" cy="168" r="8"/><circle cx="236" cy="236" r="9"/></g>
+          </g>
+
+          <g class="scene-node data-node" data-node="data" transform="translate(500 142) scale(.74) translate(-499 -258)">
+            <ellipse class="node-halo" cx="499" cy="301" rx="117" ry="48" fill="#2ba5f4" filter="url(#glow)"/>
+            <path d="m385 302 114-64 114 64-114 65Z" fill="#102440" stroke="#285580"/>
+            <path class="node-rim" d="m397 302 102-56 102 56-102 57Z" fill="none" stroke="#4489e3"/>
+            <g transform="translate(0 80)"><path d="m423 186 76-43 76 43v30l-76 44-76-44Z" fill="url(#cyan-side)" stroke="#3976a6"/><path d="m423 186 76 43 76-43-76-43Z" fill="url(#surface)" stroke="#5796c9"/><path d="m499 229 76-43v30l-76 44Z" fill="#1b2854"/><path d="m437 208 44 25" stroke="#58dce9" stroke-width="3"/><circle cx="558" cy="218" r="3" fill="#8c9dff"/></g>
+            <g transform="translate(0 46)"><path d="m423 186 76-43 76 43v30l-76 44-76-44Z" fill="url(#cyan-side)" stroke="#3976a6"/><path d="m423 186 76 43 76-43-76-43Z" fill="url(#surface)" stroke="#5796c9"/><path d="m499 229 76-43v30l-76 44Z" fill="#1d2c5a"/><path d="m437 208 44 25" stroke="#58dce9" stroke-width="3"/><circle cx="558" cy="218" r="3" fill="#8c9dff"/></g>
+            <g transform="translate(0 12)"><path d="m423 186 76-43 76 43v30l-76 44-76-44Z" fill="url(#cyan-side)" stroke="#3976a6"/><path d="m423 186 76 43 76-43-76-43Z" fill="url(#cyan-surface)" stroke="#71daf1"/><path d="m499 229 76-43v30l-76 44Z" fill="#233568"/><path d="m437 208 44 25" stroke="#58dce9" stroke-width="3"/><circle cx="558" cy="218" r="3" fill="#b8b5ff"/></g>
+            <path d="m460 194 39-22 39 22-39 22Z" fill="#50c5dc" fill-opacity=".15" stroke="#81e4f3" stroke-width="2"/>
+            <path d="m480 193 19-11 19 11-19 11Z" fill="#a0eff6"/>
+          </g>
+
+          <g class="scene-node evaluator-node" data-node="evaluator" transform="translate(800 144) scale(.67) translate(-788 -239)">
+            <ellipse class="node-halo" cx="788" cy="292" rx="109" ry="42" fill="#8d57e8" filter="url(#glow)"/>
+            <path d="m691 288 97-54 99 56-99 56Z" fill="#172341" stroke="#493b78"/>
+            <path class="node-rim" d="m701 288 87-48 89 50-89 49Z" fill="none" stroke="#9b6cf0"/>
+            <path d="m720 158 115-66 20 12v177l-115 66-20-12Z" fill="#222149" stroke="#7554a9"/>
+            <path d="m720 158 115-66v177l-115 66Z" fill="url(#violet-surface)" stroke="#ac8af6" stroke-width="2"/>
+            <path d="m733 165 89-51v139l-89 51Z" fill="#17233f" fill-opacity=".7" stroke="#6c61aa"/>
+            <path d="m762 167 23-13 23 2v34c0 20-17 41-23 48-6-1-23-3-23-23Z" fill="#9f92fd" fill-opacity=".12" stroke="#b5a8ff" stroke-width="2"/>
+            <path d="m773 191 9 5 17-29" fill="none" stroke="#d0bcff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="m747 259 59-34m-59 46 40-23" stroke="#777ec2" stroke-width="3" stroke-linecap="round"/>
+          </g>
+
+          <g class="scene-node calculator-node" data-node="calculator" transform="translate(630 173) scale(.70) translate(-614 -379)">
+            <path d="m567 375 45-25 49 28-46 26Z" fill="#273554" stroke="#528baf"/>
+            <path d="m567 375 48 28v10l-48-28Zm48 28 46-25v10l-46 25Z" fill="#15243d" stroke="#3b5f80"/>
+            <path d="m586 373 24-14 27 15-25 14Z" fill="#2c7a91"/>
+            <path d="m596 375 16-9m-6 14 16-9" stroke="#a8e7f5" stroke-width="2"/>
+          </g>
+
+            <g class="iso-paper paper-read"><use href="#paper" x="329" y="143" width="22" height="27" transform="rotate(-16 340 157)"/></g>
+            <g class="iso-paper paper-submit"><use href="#paper" x="687" y="201" width="22" height="27" transform="rotate(16 698 215)"/></g>
+          </g>
+<!-- Inline fragment for viewBox="0 0 1000 260". Main node captions belong in HTML. -->
+<g class="schematic-art">
+  <defs>
+    <marker id="scheme-arrow-read" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="m2 1 4 3-4 3" fill="none" stroke="#66dce7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="scheme-arrow-submit" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="m2 1 4 3-4 3" fill="none" stroke="#b495e9" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="scheme-arrow-reply" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="m2 1 4 3-4 3" fill="none" stroke="#778ead" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="scheme-arrow-calculator" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="m2 1 4 3-4 3" fill="none" stroke="#6eafbd" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Each action starts at the agent; the evaluator is not downstream of the data node. -->
+  <g class="scheme-connections" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M236 127H464" stroke="#30455f" stroke-width="1.4"/>
+    <path d="M236 140H298Q310 140 310 152V172Q310 184 322 184H788Q800 184 800 172V158" stroke="#343c5b" stroke-width="1.4"/>
+    <path d="M500 96V78Q500 66 488 66H224Q212 66 212 78V96" stroke="#2c405b" stroke-width="1.2"/>
+    <path d="M800 96V48Q800 36 788 36H200Q188 36 188 48V96" stroke="#303d58" stroke-width="1.2"/>
+    <path d="M200 158V209Q200 221 212 221H480" stroke="#2b4055" stroke-width="1.2"/>
+
+    <path class="path-read" d="M236 127H462" stroke="#66dce7" stroke-width="1.6" opacity=".58" marker-end="url(#scheme-arrow-read)"/>
+    <path class="path-submit" d="M236 140H298Q310 140 310 152V172Q310 184 322 184H788Q800 184 800 172V160" stroke="#b495e9" stroke-width="1.6" opacity=".44" marker-end="url(#scheme-arrow-submit)"/>
+    <path class="path-reply reply-data" d="M500 96V78Q500 66 488 66H224Q212 66 212 78V94" stroke="#7897b8" stroke-width="1.2" stroke-dasharray="3 6" opacity=".56" marker-end="url(#scheme-arrow-reply)"/>
+    <path class="path-reply reply-evaluator" d="M800 96V48Q800 36 788 36H200Q188 36 188 48V94" stroke="#8c86b5" stroke-width="1.2" stroke-dasharray="3 6" opacity=".43" marker-end="url(#scheme-arrow-reply)"/>
+    <path class="path-calculator" d="M200 158V209Q200 221 212 221H478" stroke="#6eafbd" stroke-width="1.3" opacity=".39" marker-end="url(#scheme-arrow-calculator)"/>
+  </g>
+
+  <g class="scheme-agent">
+    <rect class="scheme-surface" x="164" y="96" width="72" height="62" rx="12" fill="#132137" stroke="#385873" stroke-width="1.3"/>
+    <g fill="none" stroke="#6394b0" stroke-width="1.15" stroke-linecap="round">
+      <path d="m181 115 19-7 19 7-19 12-19-12 19 31 19-7-19-12-19 12 19-31 19 31"/>
+      <path d="m181 139 19 7m0-38v38m19-31v24"/>
+    </g>
+    <g fill="#8cd7df" stroke="#132137" stroke-width="1.5">
+      <circle cx="181" cy="115" r="3.5"/>
+      <circle cx="181" cy="139" r="3.5"/>
+      <circle cx="200" cy="108" r="3.5"/>
+      <circle cx="200" cy="127" r="4"/>
+      <circle cx="200" cy="146" r="3.5"/>
+      <circle cx="219" cy="115" r="3.5"/>
+      <circle cx="219" cy="139" r="3.5"/>
+    </g>
+  </g>
+
+  <g class="scheme-data">
+    <rect class="scheme-surface" x="464" y="96" width="72" height="62" rx="12" fill="#132137" stroke="#385873" stroke-width="1.3"/>
+    <g stroke="#8bc3d2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M482 112v28c0 5 36 5 36 0v-28" fill="#193047"/>
+      <ellipse cx="500" cy="112" rx="18" ry="6" fill="#1b3b50"/>
+      <path d="M482 121c0 8 36 8 36 0m-36 10c0 8 36 8 36 0" fill="none"/>
+      <path d="M489 123v1m0 9v1" stroke="#a3e6e8" stroke-width="2.5"/>
+    </g>
+  </g>
+
+  <g class="scheme-evaluator">
+    <rect class="scheme-surface" x="764" y="96" width="72" height="62" rx="12" fill="#181f36" stroke="#4a4b72" stroke-width="1.3"/>
+    <path d="m800 106 18 7v13c0 12-11 19-18 23-7-4-18-11-18-23v-13Z" fill="#242944" stroke="#a59bd2" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="m790 126 7 7 14-16" fill="none" stroke="#c7b3ee" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g class="scheme-calculator">
+    <rect class="scheme-surface" x="480" y="202" width="40" height="38" rx="8" fill="#111e30" stroke="#324d65" stroke-width="1.2"/>
+    <rect x="490" y="209" width="20" height="6" rx="1.5" fill="#284659" stroke="#6c9cac" stroke-width="1"/>
+    <path d="M491 222h3m-1.5-1.5v3m7.5-1.5h3m-12 6h3m6 0h3m5-7v8" fill="none" stroke="#8eb4c4" stroke-width="1.3" stroke-linecap="round"/>
+    
+  </g>
+</g>
+
+          </svg><span class="calculator-caption">Калькулятор</span></div>
+          <div class="diagram-labels">
+            <div class="label-agent"><strong>Агент</strong><span id="scene-agent-name">Reconciler</span></div>
+            <div class="label-data"><strong>Данные компании</strong><span id="database-label">Счета · платежи · проводки</span></div>
+            <div class="label-evaluator"><strong>Оценщик</strong><span>Проверка доказательств</span></div>
+          </div>
+        </div>
+        <div class="scene-legend"><span><i class="legend-line cyan"></i>Действие агента</span><span><i class="legend-line violet"></i>Ответ среды</span></div>
+      </div>
+      <div class="playback-bar">
+        <button class="icon-button" type="button" id="play-toggle" disabled aria-label="Пауза просмотра" title="Пауза просмотра"><span id="play-icon" aria-hidden="true">Ⅱ</span></button>
+        <div class="timeline"><label for="timeline" class="sr-only">Выбранное событие</label><input id="timeline" type="range" min="0" max="0" value="0" disabled><div class="timeline-labels"><span id="playback-label">Нет событий</span><span id="compute-time">Расчёт: —</span></div></div>
+        <label class="speed-control"><span class="sr-only">Скорость просмотра</span><select id="speed"><option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label>
+        <button class="text-button" id="replay" type="button" disabled>Повторить</button>
+      </div>
+      <div class="playback-note" id="playback-note">Сцена показывает реальные события. Скорость просмотра не влияет на время расчёта.</div>
+    </section>
+
+    <aside class="event-panel" aria-labelledby="event-heading">
+      <div class="panel-heading"><h2 id="event-heading">Текущее действие</h2><span class="event-index" id="event-index">— / —</span></div>
+      <div class="event-body">
+        <div class="event-type" id="event-type">ОЖИДАНИЕ</div>
+        <h3 id="event-title">Агент готов к работе</h3>
+        <p class="event-summary" id="event-summary">После запуска здесь появятся запросы агента и ответы среды.</p>
+        <div class="event-facts"><div><span>Шаг</span><strong id="step-value">—<small> / 100</small></strong></div><div><span>Осталось</span><strong id="budget-value">100<small> шагов</small></strong></div></div>
+        <div class="record-preview" id="record-preview"><div class="empty-event-art" aria-hidden="true"><div></div><div></div><div></div></div><p>Каждый запрос можно открыть<br>и проверить по исходным данным.</p></div>
+        <details class="json-details" id="json-details"><summary>Запрос и ответ · JSON</summary><pre id="event-json">Событие ещё не выбрано.</pre></details>
+      </div>
+      <div class="episode-info"><span class="micro-label">ЭПИЗОД</span><strong id="episode-id">Будет создан при запуске</strong><span id="episode-counts">Все компании и документы вымышлены</span></div>
+    </aside>
+  </div>
+
+  <section class="results-section" aria-labelledby="results-heading">
+    <div class="section-heading"><div><h2 id="results-heading">Результат аудита</h2><p id="results-caption">Метрики появятся после завершения расчёта.</p></div><div class="export-actions"><a class="button secondary" id="download-report" hidden download>Отчёт JSON</a><a class="button secondary" id="download-trajectory" hidden download>Траектория JSONL</a></div></div>
+    <div class="metrics-grid">
+      <div class="metric"><span>Точность <em>P</em></span><strong id="metric-precision">—</strong><small>Верные среди заявленных</small></div>
+      <div class="metric"><span>Полнота <em>R</em></span><strong id="metric-recall">—</strong><small>Найденные среди ошибок</small></div>
+      <div class="metric featured"><span>Качество <em>F1</em></span><strong id="metric-f1">—</strong><small>Баланс точности и полноты</small></div>
+      <div class="metric"><span>Награда</span><strong id="metric-reward">—</strong><small>С учётом стоимости шагов</small></div>
+    </div>
+    <div class="audit-counts" id="audit-counts"><span>Подтверждено <b id="tp">—</b></span><span>Ложных выводов <b id="fp">—</b></span><span>Пропущено <b id="fn">—</b></span><span>Шагов выполнено <b id="total-steps">—</b></span></div>
+  </section>
+
+  <div class="detail-grid">
+    <section class="log-panel" aria-labelledby="log-heading"><div class="panel-heading"><h2 id="log-heading">Журнал действий</h2><span id="log-count" class="secondary-label">0 событий</span></div><div class="event-log" id="event-log"><div class="empty-log">Здесь будет последовательность запросов агента.<br><span>Выберите событие, чтобы открыть его на сцене.</span></div></div></section>
+    <section class="findings-panel" aria-labelledby="findings-heading"><div class="panel-heading"><h2 id="findings-heading">Выводы агента</h2><span id="findings-count" class="secondary-label">После завершения</span></div><div id="findings-list" class="findings-list"><div class="empty-log">Агент ещё не отправил выводы.<br><span>У каждого вывода будут сумма и доказательства.</span></div></div></section>
+  </div>
+  <footer class="page-footer"><span>ProofLedger · воспроизводимая среда финансового аудита</span><span>Синтетические данные · скриптовая политика · без внешних API</span></footer>
+  <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+</main>
+</body>
+</html>

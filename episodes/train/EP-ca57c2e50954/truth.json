@@ -1,0 +1,45 @@
+{
+  "episode_id": "EP-ca57c2e50954",
+  "canary": "PLX-CANARY-a2c920a8f335d8fd",
+  "issues": [
+    {
+      "issue_id": "ISS-38821",
+      "type": "fx_error",
+      "affected_ids": [
+        "INV-29834"
+      ],
+      "expected_amount_minor": 1053827,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2026-01-07|EUR|KZT",
+          "A-847821",
+          "L00037"
+        ],
+        [
+          "2026-01-07|EUR|KZT",
+          "A-847821",
+          "L00038"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-50023",
+      "type": "duplicate_invoice",
+      "affected_ids": [
+        "INV-30653",
+        "INV-30761"
+      ],
+      "expected_amount_minor": 1371332,
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "A-214912",
+          "A-318395"
+        ]
+      ],
+      "tolerance_minor": 100
+    }
+  ]
+}

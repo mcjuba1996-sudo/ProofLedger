@@ -1,0 +1,85 @@
+{
+  "generator_version": "0.4.1",
+  "seed": "2003",
+  "config": {
+    "n_entities": 8,
+    "n_invoices": 60,
+    "recurring_entities": 2,
+    "split_payment_rate": 0.4,
+    "unpaid_rate": 0.1,
+    "refund_rate": 0.05,
+    "injection_rate": 0.03,
+    "boundary_distractors": 2,
+    "mixed_timezones": true,
+    "duplicate_invoice": 0,
+    "payment_allocation": 3,
+    "fx_error": 0,
+    "period_error": 0,
+    "mix_fx_allocation": 0,
+    "mix_fx_period": 0,
+    "relabel": 0
+  },
+  "canary": "PLX-CANARY-350777644a097796",
+  "issues": [
+    {
+      "issue_id": "ISS-12511",
+      "type": "payment_allocation",
+      "cause": "partial_allocation",
+      "invoice_id": "INV-54145",
+      "mixed": false,
+      "changes": [
+        {
+          "op": "misallocate",
+          "payment_id": "PAY-52154",
+          "kind": "partial",
+          "invoice_id": "INV-54145",
+          "cash_row": "L00151",
+          "suspense_row": "L00153",
+          "ar_row": "L00152",
+          "ar_credit_before": 66249900,
+          "ar_credit_after": 18784280
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-22502",
+      "type": "payment_allocation",
+      "cause": "missing_allocation",
+      "invoice_id": "INV-37684",
+      "mixed": false,
+      "changes": [
+        {
+          "op": "misallocate",
+          "payment_id": "PAY-54327",
+          "kind": "missing",
+          "invoice_id": "INV-37684",
+          "cash_row": "L00154",
+          "suspense_row": "L00155",
+          "ar_row": null,
+          "ar_credit_before": 61403668,
+          "ar_credit_after": 0
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-56272",
+      "type": "payment_allocation",
+      "cause": "partial_allocation",
+      "invoice_id": "INV-60334",
+      "mixed": false,
+      "changes": [
+        {
+          "op": "misallocate",
+          "payment_id": "PAY-57787",
+          "kind": "partial",
+          "invoice_id": "INV-60334",
+          "cash_row": "L00178",
+          "suspense_row": "L00180",
+          "ar_row": "L00179",
+          "ar_credit_before": 507485500,
+          "ar_credit_after": 212437272
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "observation",
+  "type": "object",
+  "required": [
+    "result",
+    "error",
+    "steps_remaining"
+  ],
+  "properties": {
+    "task": {
+      "type": "string"
+    },
+    "manifest": {
+      "type": "object"
+    },
+    "policy": {
+      "type": "object"
+    },
+    "result": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "error": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "code"
+          ],
+          "properties": {
+            "code": {
+              "enum": [
+                "invalid_action",
+                "unknown_action",
+                "unknown_table",
+                "unknown_id",
+                "invalid_limit",
+                "invalid_cursor",
+                "invalid_expression",
+                "division_by_zero",
+                "overflow",
+                "invalid_submission",
+                "truncated",
+                "episode_done"
+              ]
+            },
+            "message": {
+              "type": "string"
+            },
+            "reason": {
+              "enum": [
+                "step_limit",
+                "time_limit"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "steps_remaining": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    }
+  },
+  "additionalProperties": false
+}

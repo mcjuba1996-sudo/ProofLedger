@@ -1,0 +1,64 @@
+{
+  "generator_version": "0.4.1",
+  "seed": "1009",
+  "config": {
+    "n_entities": 8,
+    "n_invoices": 60,
+    "recurring_entities": 2,
+    "split_payment_rate": 0.15,
+    "unpaid_rate": 0.1,
+    "refund_rate": 0.2,
+    "injection_rate": 0.03,
+    "boundary_distractors": 2,
+    "mixed_timezones": true,
+    "duplicate_invoice": 1,
+    "payment_allocation": 0,
+    "fx_error": 1,
+    "period_error": 0,
+    "mix_fx_allocation": 0,
+    "mix_fx_period": 0,
+    "relabel": 0
+  },
+  "canary": "PLX-CANARY-a2c920a8f335d8fd",
+  "issues": [
+    {
+      "issue_id": "ISS-38821",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_date",
+        "date_offset_days": 3,
+        "rate": "555.3272"
+      },
+      "booked": 139680340,
+      "correct": 140734167,
+      "mixed": false,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00037",
+            "L00038"
+          ],
+          "before": 140734167,
+          "after": 139680340
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-50023",
+      "type": "duplicate_invoice",
+      "cause": "invoice_copied",
+      "source_invoice_id": "INV-30653",
+      "changes": [
+        {
+          "op": "insert_invoice",
+          "invoice_id": "INV-30761",
+          "ledger_rows": [
+            "L00045",
+            "L00046"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fx.csv row",
+  "type": "object",
+  "required": [
+    "date",
+    "source_currency",
+    "target_currency",
+    "rate"
+  ],
+  "properties": {
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "source_currency": {
+      "enum": [
+        "KZT",
+        "USD",
+        "EUR"
+      ]
+    },
+    "target_currency": {
+      "enum": [
+        "KZT",
+        "USD",
+        "EUR"
+      ]
+    },
+    "rate": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "key": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

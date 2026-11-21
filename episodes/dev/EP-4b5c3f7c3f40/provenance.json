@@ -1,0 +1,142 @@
+{
+  "generator_version": "0.4.1",
+  "seed": "2001",
+  "config": {
+    "n_entities": 8,
+    "n_invoices": 75,
+    "recurring_entities": 2,
+    "split_payment_rate": 0.15,
+    "unpaid_rate": 0.1,
+    "refund_rate": 0.05,
+    "injection_rate": 0.03,
+    "boundary_distractors": 2,
+    "mixed_timezones": true,
+    "duplicate_invoice": 3,
+    "payment_allocation": 0,
+    "fx_error": 3,
+    "period_error": 0,
+    "mix_fx_allocation": 0,
+    "mix_fx_period": 0,
+    "relabel": 0
+  },
+  "canary": "PLX-CANARY-ea2a6cfebea1165d",
+  "issues": [
+    {
+      "issue_id": "ISS-22450",
+      "type": "duplicate_invoice",
+      "cause": "invoice_copied",
+      "source_invoice_id": "INV-91887",
+      "changes": [
+        {
+          "op": "insert_invoice",
+          "invoice_id": "INV-93000",
+          "ledger_rows": [
+            "L00287",
+            "L00288"
+          ]
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-29405",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_rate",
+        "factor": "0.97",
+        "rate": "486.3026"
+      },
+      "booked": 82978785,
+      "correct": 85545142,
+      "mixed": false,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00017",
+            "L00018"
+          ],
+          "before": 85545142,
+          "after": 82978785
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-38879",
+      "type": "duplicate_invoice",
+      "cause": "invoice_copied",
+      "source_invoice_id": "INV-32737",
+      "changes": [
+        {
+          "op": "insert_invoice",
+          "invoice_id": "INV-42421",
+          "ledger_rows": [
+            "L00049",
+            "L00050"
+          ]
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-51706",
+      "type": "duplicate_invoice",
+      "cause": "invoice_copied",
+      "source_invoice_id": "INV-13006",
+      "changes": [
+        {
+          "op": "insert_invoice",
+          "invoice_id": "INV-14198",
+          "ledger_rows": [
+            "L00007",
+            "L00008"
+          ]
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-65417",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_rate",
+        "factor": "1.01",
+        "rate": "487.5966"
+      },
+      "booked": 343238751,
+      "correct": 339840339,
+      "mixed": false,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00087",
+            "L00088"
+          ],
+          "before": 339840339,
+          "after": 343238751
+        }
+      ]
+    },
+    {
+      "issue_id": "ISS-70601",
+      "type": "fx_error",
+      "cause": {
+        "kind": "wrong_rate",
+        "factor": "1.05",
+        "rate": "503.4633"
+      },
+      "booked": 494662762,
+      "correct": 471107434,
+      "mixed": false,
+      "changes": [
+        {
+          "op": "update_amount",
+          "ledger_rows": [
+            "L00313",
+            "L00314"
+          ],
+          "before": 471107434,
+          "after": 494662762
+        }
+      ]
+    }
+  ]
+}

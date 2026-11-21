@@ -1,0 +1,123 @@
+{
+  "episode_id": "EP-4b5c3f7c3f40",
+  "canary": "PLX-CANARY-ea2a6cfebea1165d",
+  "issues": [
+    {
+      "issue_id": "ISS-22450",
+      "type": "duplicate_invoice",
+      "affected_ids": [
+        "INV-91887",
+        "INV-93000"
+      ],
+      "expected_amount_minor": 515208,
+      "currency": "EUR",
+      "evidence_sets": [
+        [
+          "A-488820",
+          "A-496133"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-29405",
+      "type": "fx_error",
+      "affected_ids": [
+        "INV-21140"
+      ],
+      "expected_amount_minor": 2566357,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2026-02-02|EUR|KZT",
+          "A-383892",
+          "L00017"
+        ],
+        [
+          "2026-02-02|EUR|KZT",
+          "A-383892",
+          "L00018"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-38879",
+      "type": "duplicate_invoice",
+      "affected_ids": [
+        "INV-32737",
+        "INV-42421"
+      ],
+      "expected_amount_minor": 481051,
+      "currency": "EUR",
+      "evidence_sets": [
+        [
+          "A-194714",
+          "A-918262"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-51706",
+      "type": "duplicate_invoice",
+      "affected_ids": [
+        "INV-13006",
+        "INV-14198"
+      ],
+      "expected_amount_minor": 57042400,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "A-498741",
+          "A-814942"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-65417",
+      "type": "fx_error",
+      "affected_ids": [
+        "INV-59468"
+      ],
+      "expected_amount_minor": 3398412,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2026-02-09|USD|KZT",
+          "A-770077",
+          "L00087"
+        ],
+        [
+          "2026-02-09|USD|KZT",
+          "A-770077",
+          "L00088"
+        ]
+      ],
+      "tolerance_minor": 100
+    },
+    {
+      "issue_id": "ISS-70601",
+      "type": "fx_error",
+      "affected_ids": [
+        "INV-99033"
+      ],
+      "expected_amount_minor": 23555328,
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2026-02-28|USD|KZT",
+          "A-385289",
+          "L00313"
+        ],
+        [
+          "2026-02-28|USD|KZT",
+          "A-385289",
+          "L00314"
+        ]
+      ],
+      "tolerance_minor": 100
+    }
+  ]
+}
